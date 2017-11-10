@@ -1,31 +1,52 @@
-NAME	=	fdf
+#******************************************************************************#
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dpearson <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/11/08 03:40:05 by dpearson          #+#    #+#              #
+#    Updated: 2017/11/08 03:40:08 by dpearson         ###   ########.fr        #
+#                                                                              #
+#******************************************************************************#
 
-CFLAGS	+=	-Wall -Wextra -Werror
-CFLAGS	+=	-I	libft -I minilibx
-CFLAGS	+=	-L./miniLibX -lmlx -framework OpenGL -framework AppKit
+NAME		=	fdf
 
-SRC		=	main.c
+LIBS		=	./libs
 
-LIBFT	=	libft/libft.a
+LIBFT_DIR	=	$(LIBS)/libft
 
-MLX		=	miniLibX/libmlx.a
+MLX_DIR		=	$(LIBS)/miniLibX
+
+INCLUDES	=	./includes
+
+CFLAGS		+=	-Wall -Wextra -Werror
+CFLAGS		+=	-I $(LIBFT_DIR)/ -I $(MLX_DIR) -I $(INCLUDES)
+CFLAGS		+=	-L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+
+FILENAMES	=	main.c parse.c img.c draw.c
+
+SRC = $(addprefix srcs/, $(FILENAMES))
+
+LIBFT		=	$(LIBFT_DIR)/libft.a
+
+MLX			=	$(MLX_DIR)/libmlx.a
 
 all: $(NAME)
 
 $(LIBFT):
-		@make -C libft
+		@make -C $(LIBFT_DIR)
 
 $(MLX):
-		@make -C miniLibX
+		@make -C $(MLX_DIR)
 
 $(NAME): $(LIBFT) $(MLX)
-		@gcc $(CFLAGS) $(SRC) $(LIBA) -o $(NAME)
+		@gcc $(CFLAGS) $(SRC) $(LIBFT) -o $(NAME)
 
 clean:
-		@make -C libft clean
-		@make -C miniLibX clean
+		@make -C $(LIBFT_DIR) clean
+		@make -C $(MLX_DIR) clean
 fclean: clean
 		@rm -rf $(NAME)
-		@make -C libft fclean
-
+		@make -C $(LIBFT_DIR) fclean
 re: fclean all
