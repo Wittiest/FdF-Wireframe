@@ -12,23 +12,6 @@
 
 #include "../includes/fdf.h"
 
-// void	print_term(t_img *img)
-// {
-// 	int i = 0;
-// 	int j;
-// 	while (i < img->ln_count)
-// 	{
-// 		j = 0;
-// 		while (j < img->width)
-// 		{
-// 			printf("%d ", img->map[i][j]);
-// 			j++;
-// 		}
-// 		printf("\n");
-// 		i++;
-// 	}
-// }
-
 /*
 **	I made the img var static so that it would all be initialized to 0.
 **	Usually statics are only declared in main when they are a structure that
@@ -49,11 +32,13 @@ int		main(int argc, char **argv)
 	else
 	{
 		img.file_name = argv[1];
-		fd = open(img.file_name, O_RDONLY);
+		if ((fd = open(img.file_name, O_RDONLY)) < 1)
+		{
+			write(1, "Error opening file\n", 19);
+			return (-1);
+		}
 		read_file(&img, fd);
 		close(fd);
-		create_pair_list(&img);
-		// print_term(&img);
 		mlx(&img);
 	}
 	return (0);

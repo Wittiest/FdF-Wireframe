@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <stdio.h>
+
 void	esc_key(t_img *img)
 {
 	mlx_destroy_window(img->mlx, img->win);
@@ -20,25 +20,50 @@ void	esc_key(t_img *img)
 
 int		key_hook(int keycode, t_img *img)
 {
+	// for 5 bonus, add color changer
 	if (keycode == 53)
+
 		esc_key(img);
-	if (keycode == 2)
+	else if (keycode == 34)
+	{
+		img->zoom += 1;
+		update_pair_list(img);		
+	}
+	else if (keycode == 31)
+	{
+		img->zoom -= 1;
+		update_pair_list(img);		
+	}
+	else if (keycode == 2)
 	{
 		img->b += .05;
 		update_pair_list(img);
-		mlx_clear_window(img->mlx, img->win);
-		draw(img);
 	}
-	if (keycode == 0)
+	else if (keycode == 0)
 	{
 		img->b -= .05;
 		update_pair_list(img);
-		mlx_clear_window(img->mlx, img->win);
-		draw(img);
-	}	
-	// if (keycode == KEY_M)
-	// 	view->project = view->project ? 0 : 1;
-	// toggle_pressed(keycode, view, 1);
+	}
+	else if (keycode == 13)
+	{
+		img->a -= .05;
+		update_pair_list(img);
+	}
+	else if (keycode == 1)
+	{
+		img->a += .05;
+		update_pair_list(img);
+	}
+	else if (keycode == 126)
+		img->y -= HEIGHT / 50;
+	else if (keycode == 125)
+		img->y += HEIGHT / 50;
+	else if (keycode == 123)
+		img->x -= WIDTH / 50;
+	else if (keycode == 124)
+		img->x += WIDTH / 50;
+	mlx_clear_window(img->mlx, img->win);
+	draw(img);
 	return (0);
 }
 
@@ -48,6 +73,10 @@ void	mlx(t_img *img)
 	img->win = mlx_new_window(img->mlx, WIDTH, HEIGHT, "FDF");
 	//hook up key presses
 	mlx_key_hook(img->win, &key_hook, img);
+	img->x = WIDTH / 2 - img->width;
+	img->y = HEIGHT / 2 - img->ln_count;
+	img->zoom = 1;
+	create_pair_list(img);
 	draw(img);
 	mlx_loop(img->mlx);
 }

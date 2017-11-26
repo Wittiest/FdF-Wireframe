@@ -24,6 +24,7 @@ typedef struct	s_pair
 {
 	int			x;
 	int			y;
+	int			color;
 }				t_pair;
 /*
 **	Alpha beta and gamma are my euler angles
@@ -40,15 +41,18 @@ typedef struct	s_img
 	double		a;
 	double		b;
 	double		g;
+	double		zoom;
+	int			x;
+	int			y;
 }				t_img;
 
 void			read_file(t_img *img, int fd);
 void			mlx(t_img *img);
 void			draw(t_img *img);
-int				transform_point_x(t_img *img, int x, int y);
-int				transform_point_y(t_img *img, int x, int y);
 void			create_pair_list(t_img *img);
 void			update_pair_list(t_img *img);
-//prototype everything or make it static
-//• You must be able to quit the program by pressing ’esc’.
+int				transform_point_x(t_img *img, int x, int y);
+int				transform_point_y(t_img *img, int x, int y);
+int				define_color(int z);
+
 #endif

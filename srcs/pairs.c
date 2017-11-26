@@ -16,9 +16,9 @@ int		transform_point_x(t_img *img, int x, int y)
 {
 	double z;
 
-	z = img->map[y][x] * img->width * 10000 / 100000 * img->ln_count;
-	y *= img->width;
-	x *= img->width;
+	z = (img->map[y][x] * img->width * 10000 / 10000 * img->ln_count) / 10;
+	y *= img->zoom;
+	x *= img->zoom;
 	x = cos(img->b) * (x * cos(img->g) - y * sin(img->g)) + z * sin(img->b);
 	return (x);
 }
@@ -27,13 +27,21 @@ int		transform_point_y(t_img *img, int x, int y)
 {
 	double z;
 
-	z = img->map[y][x] * img->width * 10000 / 100000 * img->ln_count;
-	y *= img->width;
-	x *= img->width;
+	z = (img->map[y][x] * img->width * 10000 / 10000 * img->ln_count) / 10;
+	y *= img->zoom;
+	x *= img->zoom;
 	y = sin(img->a) * sin(img->b) * (x * cos(img->g) - y * sin(img->g)) +
 		cos(img->b) * (z * sin(img->a) + x * sin(img->g)) + y * cos(img->a) *
 		cos(img->g);
 	return (y);
+}
+
+int		define_color(int z)
+{
+	if (z >= 10)
+		return (0x00FF0000);
+	else
+		return (0x0000FF00);
 }
 
 void	create_pair_list(t_img *img)
@@ -52,6 +60,7 @@ void	create_pair_list(t_img *img)
 		{
 			list[y][x].x = transform_point_x(img, x, y);
 			list[y][x].y = transform_point_y(img, x, y);
+			list[y][x].color = define_color(img->map[y][x]);
 			x++;
 		}
 		y++;
@@ -72,6 +81,7 @@ void	update_pair_list(t_img *img)
 		{
 			img->render_head[y][x].x = transform_point_x(img, x, y);
 			img->render_head[y][x].y = transform_point_y(img, x, y);
+			img->render_head[y][x].color = define_color(img->map[y][x]);
 			x++;
 		}
 		y++;

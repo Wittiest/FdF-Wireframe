@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 void	draw_line(t_pair point_start, t_pair point_end, t_img *img)
 {
@@ -30,7 +29,10 @@ void	draw_line(t_pair point_start, t_pair point_end, t_img *img)
 
 	while (point_start.x != point_end.x || point_start.y != point_end.y)
 	{
-    	mlx_pixel_put(img->mlx, img->win, point_start.x, point_start.y, 0x0000FF00);
+		if (point_start.color > point_end.color)
+    		mlx_pixel_put(img->mlx, img->win, point_start.x + img->x, point_start.y + img->y, point_start.color);
+    	else
+    		mlx_pixel_put(img->mlx, img->win, point_start.x + img->x, point_start.y + img->y, point_end.color);
 	    e2 = err;
 	    if (e2 > -dx)
 	    {
