@@ -20,6 +20,14 @@
 #define WIDTH 1600
 #define HEIGHT 1200
 
+typedef struct	s_pair
+{
+	int			x;
+	int			y;
+}				t_pair;
+/*
+**	Alpha beta and gamma are my euler angles
+*/
 typedef struct	s_img
 {
 	void		*mlx;
@@ -28,14 +36,19 @@ typedef struct	s_img
 	int			ln_count;
 	int			width;
 	int			**map;
-	double		alpha;
-	double		beta;
-	double		gamma;
+	t_pair		**render_head;
+	double		a;
+	double		b;
+	double		g;
 }				t_img;
 
 void			read_file(t_img *img, int fd);
 void			mlx(t_img *img);
 void			draw(t_img *img);
+int				transform_point_x(t_img *img, int x, int y);
+int				transform_point_y(t_img *img, int x, int y);
+void			create_pair_list(t_img *img);
+void			update_pair_list(t_img *img);
 //prototype everything or make it static
 //• You must be able to quit the program by pressing ’esc’.
 #endif

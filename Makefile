@@ -24,7 +24,7 @@ CFLAGS		+=	-Wall -Wextra -Werror
 CFLAGS		+=	-I $(LIBFT_DIR)/ -I $(MLX_DIR) -I $(INCLUDES)
 CFLAGS		+=	-L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
-FILENAMES	=	main.c parse.c img.c draw.c
+FILENAMES	=	main.c parse.c img.c draw.c pairs.c
 
 SRC = $(addprefix srcs/, $(FILENAMES))
 

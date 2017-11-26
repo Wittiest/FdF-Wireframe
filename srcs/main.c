@@ -52,7 +52,8 @@ int		main(int argc, char **argv)
 		fd = open(img.file_name, O_RDONLY);
 		read_file(&img, fd);
 		close(fd);
-		// print_term(&img);		
+		create_pair_list(&img);
+		// print_term(&img);
 		mlx(&img);
 	}
 	return (0);

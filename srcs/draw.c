@@ -13,38 +13,42 @@
 #include "fdf.h"
 #include <stdio.h>
 
-int		transform_point_x(t_img *img, int x, int y)
+void	draw_line(t_pair point_start, t_pair point_end, t_img *img)
 {
-	double z;
-	double beta = .3;
-	double gamma = 0;
+	int dx;
+	int dy;
+	int sx;
+	int sy;
+	int err;
+	int e2;
 
-	z = img->map[y][x] * img->width * 10000 / 100000 * img->ln_count;
-	y *= img->width;
-	x *= img->width;
-	x = cos(beta) * (x * cos(gamma) - y * sin(gamma)) + z * sin(beta);
-	return (x);
+    dx = abs(point_end.x - point_start.x);
+    dy = abs(point_end.y - point_start.y);
+	sx = point_start.x < point_end.x ? 1 : -1;
+	sy = point_start.y < point_end.y ? 1 : -1; 
+	err = (dx > dy ? dx : -dy) / 2;
+
+	while (point_start.x != point_end.x || point_start.y != point_end.y)
+	{
+    	mlx_pixel_put(img->mlx, img->win, point_start.x, point_start.y, 0x0000FF00);
+	    e2 = err;
+	    if (e2 > -dx)
+	    {
+	    	err -= dy;
+	    	point_start.x += sx;
+	    }
+	    if (e2 < dy)
+	    {
+	    	err += dx;
+	    	point_start.y += sy;
+	    }   		
+	}
 }
 
-int		transform_point_y(t_img *img, int x, int y)
-{
-	double z;
-	double a = 0;
-	double b = .3;
-	double g = 0;
-
-	z = img->map[y][x] * img->width * 10000 / 100000 * img->ln_count;
-	y *= img->width;
-	x *= img->width;
-	y = sin(a) * sin(b) * (x * cos(g) - y * sin(g)) + cos(b) * (z * sin(a) + x * sin(g)) + y * cos(a) * cos(g);
-	return (y);
-}
- 
 void	draw(t_img *img)
 {
 	int x;
 	int y;
-	int z;
 
 	y = 0;
 	while (y < img->ln_count)
@@ -52,11 +56,10 @@ void	draw(t_img *img)
 		x = 0;
 		while (x < img->width)
 		{
-			z = img->map[y][x];
-			if (z < 5)
-				mlx_pixel_put(img->mlx, img->win, transform_point_x(img, x, y), transform_point_y(img, x, y), 0x0000FF00);
-			else
-				mlx_pixel_put(img->mlx, img->win, transform_point_x(img, x, y), transform_point_y(img, x, y), 0x00FF0000);		
+			if (x + 1 < img->width)
+				draw_line(img->render_head[y][x], img->render_head[y][x + 1], img);
+			if (y + 1 < img->ln_count)
+				draw_line(img->render_head[y][x], img->render_head[y + 1][x], img);
 			x++;
 		}
 		y++;
