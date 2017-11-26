@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
+#include <stdio.h>
 void	mlx(t_img *img)
 {
 	img->mlx = mlx_init();
-	img->win = mlx_new_window(img->mlx, 1600, 1200, "FDF");
+	img->win = mlx_new_window(img->mlx, WIDTH, HEIGHT, "FDF");
 	//hook up key presses
 	draw(img);
 	mlx_loop(img->mlx);

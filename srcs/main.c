@@ -12,22 +12,22 @@
 
 #include "../includes/fdf.h"
 
-void	print_term(t_img *img)
-{
-	int i = 0;
-	int j;
-	while (i < img->ln_count)
-	{
-		j = 0;
-		while (j < img->width)
-		{
-			printf("%d ", img->map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-}
+// void	print_term(t_img *img)
+// {
+// 	int i = 0;
+// 	int j;
+// 	while (i < img->ln_count)
+// 	{
+// 		j = 0;
+// 		while (j < img->width)
+// 		{
+// 			printf("%d ", img->map[i][j]);
+// 			j++;
+// 		}
+// 		printf("\n");
+// 		i++;
+// 	}
+// }
 
 /*
 **	I made the img var static so that it would all be initialized to 0.

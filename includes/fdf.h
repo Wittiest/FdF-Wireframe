@@ -15,27 +15,10 @@
 #include "../libs/miniLibX/mlx.h"
 #include "../libs/libft/includes/libft.h"
 #include <math.h>
+#include <fcntl.h>
 
-typedef	struct	s_vector3
-{
-	int		x;
-	int		y;
-	int		z;
-}				t_vector3;
-
-
-typedef	struct	s_mesh
-{
-	t_vector3	position; // location of center of object
-	t_vector3	rotation;
-	// linked list of vertices
-}				t_mesh;
-
-typedef	struct	s_cam
-{
-	t_vector3	position;
-	t_vector3	target;
-}				t_cam;
+#define WIDTH 1600
+#define HEIGHT 1200
 
 typedef struct	s_img
 {
@@ -45,11 +28,14 @@ typedef struct	s_img
 	int			ln_count;
 	int			width;
 	int			**map;
+	double		alpha;
+	double		beta;
+	double		gamma;
 }				t_img;
 
 void			read_file(t_img *img, int fd);
 void			mlx(t_img *img);
-void			draw(t_img img);
+void			draw(t_img *img);
 //prototype everything or make it static
-
+//• You must be able to quit the program by pressing ’esc’.
 #endif
