@@ -40,15 +40,17 @@ int		define_color(int z)
 {
 	if (z >= 10)
 		return (0x00FF0000);
-	else
+	else if (z >= 5)
 		return (0x0000FF00);
+	else
+		return (0x00000FF0);	
 }
 
 void	create_pair_list(t_img *img)
 {
-	int x;
-	int y;
-	t_pair **list;
+	int		x;
+	int		y;
+	t_pair	**list;
 
 	list = (t_pair **)(malloc(sizeof(t_pair *) * img->ln_count));
 	y = 0;

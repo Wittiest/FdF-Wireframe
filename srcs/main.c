@@ -25,7 +25,7 @@
 int		main(int argc, char **argv)
 {
 	static t_img	img;
-	int fd;
+	int				fd;
 
 	if (argc != 2)
 		write(2, "usage: ./fdf filename.fdf\n", 26);

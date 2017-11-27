@@ -9,16 +9,17 @@
 /*   Updated: 2017/11/08 03:52:24 by dpearson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef FDF_H
-#define FDF_H
+# define FDF_H
 
-#include "../libs/miniLibX/mlx.h"
-#include "../libs/libft/includes/libft.h"
-#include <math.h>
-#include <fcntl.h>
+# include "../libs/miniLibX/mlx.h"
+# include "../libs/libft/includes/libft.h"
+# include <math.h>
+# include <fcntl.h>
 
-#define WIDTH 1600
-#define HEIGHT 1200
+# define WIDTH 1600
+# define HEIGHT 1200
 
 typedef struct	s_pair
 {
@@ -26,9 +27,7 @@ typedef struct	s_pair
 	int			y;
 	int			color;
 }				t_pair;
-/*
-**	Alpha beta and gamma are my euler angles
-*/
+
 typedef struct	s_img
 {
 	void		*mlx;
@@ -44,6 +43,7 @@ typedef struct	s_img
 	double		zoom;
 	int			x;
 	int			y;
+	int			c_tog;
 }				t_img;
 
 void			read_file(t_img *img, int fd);
@@ -54,5 +54,6 @@ void			update_pair_list(t_img *img);
 int				transform_point_x(t_img *img, int x, int y);
 int				transform_point_y(t_img *img, int x, int y);
 int				define_color(int z);
+int				key_hook(int keycode, t_img *img);
 
 #endif
