@@ -11,6 +11,6 @@ To use:
 5. Use C for cool color effects.
 
 # Pylone Wireframe
-https://github.com/Wittiest/FdF-Wireframe/blob/master/imgs/FDFGif.gif
-# 42 WireFRAME
-![alt text](https://github.com/Wittiest/FdF-Wireframe/blob/master/imgs/Diplay.gif)
+![Pylone](https://github.com/Wittiest/FdF-Wireframe/blob/master/imgs/FDFGif.gif)
+# 42 Wireframe
+![42t](https://github.com/Wittiest/FdF-Wireframe/blob/master/imgs/Diplay.gif)
