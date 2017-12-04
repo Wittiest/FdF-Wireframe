@@ -1,6 +1,6 @@
 # FdF-Wireframe
 
-In completing this project, I learned about rotational matrices and bresenham's line drawing algorithm.
+In completing this project, I learned about rotational matrices and bresenham's line drawing algorithm. I take input from a file that gives X,Y,Z input and project it with a library that only allows put_pixel(x,y).
 
 To use:
 1. Download the repository and run "make" in the terminal.
@@ -10,5 +10,7 @@ To use:
 4. Use arrow keys for translation.
 5. Use C for cool color effects.
 
-# Display
+# Pylone Wireframe
+https://github.com/Wittiest/FdF-Wireframe/blob/master/imgs/FDFGif.gif
+# 42 WireFRAME
 ![alt text](https://github.com/Wittiest/FdF-Wireframe/blob/master/imgs/Diplay.gif)
